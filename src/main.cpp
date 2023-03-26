@@ -6,6 +6,7 @@
 #include "shift_register_out_handler.h"
 #include "raw_analog_sensor.h"
 #include "sensor_handler.h"
+
 shift_register_out_handler* shiftRegisterOutHandler;
 void setup() {
     serial_communication_handler::getInstance();
@@ -16,16 +17,18 @@ void setup() {
 
     pinMode(2, OUTPUT);
 
-    shiftRegisterOutHandler = new shift_register_out_handler(33, 25, 32);
-    shiftRegisterOutHandler->setDat(255);
-    //delay(3000);
+    shiftRegisterOutHandler = new shift_register_out_handler(33, 25, 32, 2);
+    uint8_t a[]{0, 0};
+    shiftRegisterOutHandler->setDat(a);
 }
+uint8_t b[]{0, 255};
 void loop() {
-    digitalWrite(2, LOW);
-    for(int i = 0; i < 8; i++){
+    for(int i = 0; i < 16; i++){
         shiftRegisterOutHandler->flipPin(i);
         delay(100);
     }
-    digitalWrite(2, HIGH);
-    delay(500);
+    for(int i = 16; i >= 0; i--){
+        shiftRegisterOutHandler->flipPin(i);
+        delay(100);
+    }
 }

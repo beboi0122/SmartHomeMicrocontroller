@@ -8,13 +8,14 @@
 
 class shift_register_out_handler {
 private:
-    int latchPin;
-    int dataPin;
-    int clockPin;
-    unsigned int dat;
+    const int shift_register_number;
+    const int latchPin;
+    const int dataPin;
+    const int clockPin;
+    uint8_t* dat;
 public:
-    void setDat(unsigned int dat);
-    shift_register_out_handler(int latchPin, int dataPin, int clockPin);
+    void setDat(const uint8_t* dat);
+    shift_register_out_handler(int latchPin, int dataPin, int clockPin, int shift_register_number);
     void flipPin(unsigned int pin);
 };
 
