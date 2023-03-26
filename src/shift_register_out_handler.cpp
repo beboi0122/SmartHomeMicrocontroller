@@ -41,9 +41,6 @@ void shift_register_out_handler::flipPin(unsigned int pin) {
     }else{
         dat[n_reg] += tmp;
     }
-    Serial.print(String(n_reg) + "\n");
-    Serial.print(String(dat[n_reg]) + "\n");
-    Serial.print("\n");
     digitalWrite(latchPin, LOW);
     for(int i = shift_register_number-1; i >= 0; i--){
         shiftOut(dataPin, clockPin, MSBFIRST, dat[i]);
