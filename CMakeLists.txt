@@ -10,7 +10,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
 
-project("SmartHome" C CXX)
+project("SmartHomeArduino" C CXX)
 
 include(CMakeListsPrivate.txt)
 
@@ -30,4 +30,4 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_executable(Z_DUMMY_TARGET ${SRC_LIST} include/sensor.h src/DHT11_sensor.cpp include/DHT11_sensor.h src/serial_communication_handler.cpp include/serial_communication_handler.h src/button_handler.cpp include/button_handler.h src/shift_register_out_handler.cpp include/shift_register_out_handler.h src/raw_analog_sensor.cpp include/raw_analog_sensor.h src/sensor_handler.cpp include/sensor_handler.h)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST})
