@@ -15,6 +15,8 @@ void DHT11_sensor::read_sensor() {
     float temp =  this->dht->readTemperature();
     float hum = this->dht->readHumidity();
     String out = "{ \"" + this->sensor_name + R"(": {"Temperature": )" + temp + R"(, "Humidityz": )" + hum + " }}\n";
+
+
     serial_communication_handler::getInstance()->send_sensor_data(this->sensor_name, out);
 
     /*String out_len = String(out.length()) + "\n";

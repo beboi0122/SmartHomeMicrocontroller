@@ -7,9 +7,9 @@
 #include "serial_communication_handler.h"
 #include "shift_register_in_handler.h"
 
-shift_register_in_handler::shift_register_in_handler(String name, const int latchPin, const int dataPin,
+shift_register_in_handler::shift_register_in_handler(const int latchPin, const int dataPin,
                                                        const int clockPin, const int shift_register_number)
-        :name(name), latchPin(latchPin), dataPin(dataPin), clockPin(clockPin), shift_register_number(shift_register_number){
+        : latchPin(latchPin), dataPin(dataPin), clockPin(clockPin), shift_register_number(shift_register_number){
     pinMode(this->latchPin, OUTPUT);
     pinMode(this->clockPin, OUTPUT);
     pinMode(this->dataPin, INPUT);
@@ -43,7 +43,7 @@ void shift_register_in_handler::run() {
         }
         for (int i = 0; i < shift_register_number; ++i) {
             if (dat_before[i] != dat[i]){
-                String out = "{ \"" + this->name + R"(": {"values": [)" ;
+                String out = R"({"shift_register_in": {"values": [)" ;
                 for (int j = 0; j < shift_register_number; j++){
                     if(j < shift_register_number-1)
                         out +=  " " + String(dat[j]) + ",";
