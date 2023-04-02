@@ -10,7 +10,6 @@
 
 class shift_register_in_handler {
 private:
-    String name;
     const int shift_register_number;
     const int latchPin;
     const int dataPin;
@@ -19,7 +18,7 @@ private:
     uint8_t* dat_before;
     std::thread shift_in_thread;
 public:
-    shift_register_in_handler(String name, int latchPin, int dataPin, int clockPin, int shift_register_number);
+    shift_register_in_handler(int latchPin, int dataPin, int clockPin, int shift_register_number);
     void run();
 };
 
