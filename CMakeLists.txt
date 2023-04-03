@@ -30,4 +30,4 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_executable(Z_DUMMY_TARGET ${SRC_LIST} lib/ArduinoJson.h src/shift_register_in_handler.cpp include/shift_register_in_handler.h src/serial_in_command_handler.cpp include/serial_in_command_handler.h src/servo_handler.cpp include/servo_handler.h)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST} lib/ArduinoJson.h src/shift_register_in_handler.cpp include/shift_register_in_handler.h src/serial_in_command_handler.cpp include/serial_in_command_handler.h src/servo_handler.cpp include/servo_handler.h src/my_servo.cpp include/my_servo.h)

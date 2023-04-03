@@ -9,6 +9,7 @@
 
 DHT11_sensor::DHT11_sensor(uint8_t sensor_pin, String sensor_name): sensor(sensor_pin, std::move(sensor_name)) {
     this->dht = new DHT(sensor_pin, DHT11);
+    dht->begin();
 }
 
 void DHT11_sensor::read_sensor() {

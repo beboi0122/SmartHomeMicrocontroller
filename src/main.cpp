@@ -9,10 +9,12 @@
 #include "../lib/ArduinoJson.h"
 #include "shift_register_in_handler.h"
 #include "serial_in_command_handler.h"
+#include "my_servo.h"
+#include "servo_handler.h"
 
 bool load_config(const String& json);
 
-//shift_register_out_handler* shiftRegisterOutHandler;
+
 shift_register_in_handler *shiftRegisterInHandler;
 void setup() {
     Serial.begin(9600);
@@ -26,29 +28,15 @@ void setup() {
     }
 
     serial_communication_handler::getInstance();
-//    sensor_handler::getInstance();
-//    sensor_handler::getInstance()->add_sensor("room1_dht11", new DHT11_sensor(23, "room1_dht11"));
-//    sensor_handler::getInstance()->add_sensor("garden_light", new raw_analog_sensor(35, "garden_light"));
     sensor_handler::getInstance()->run();
     serial_in_command_handler::getInstance()->run();
 
 
-    pinMode(2, OUTPUT);
-//    shiftRegisterInHandler = new shift_register_in_handler(26, 35, 27, 2);
-//    shiftRegisterOutHandler = new shift_register_out_handler(33, 25, 32, 2);
     uint8_t a[]{0, 0};
-//    shiftRegisterOutHandler->setDat(a);
     shift_register_out_handler::getInstance()->setDat(a);
+
 }
 void loop() {
-//    for(int i = 0; i < 16; i++){
-//        shift_register_out_handler::getInstance()->flipPin(i);
-//        delay(100);
-//    }
-//    for(int i = 16; i >= 0; i--){
-//        shift_register_out_handler::getInstance()->flipPin(i);
-//        delay(100);
-//    }
 }
 
 bool load_config(const String& json){
@@ -67,10 +55,13 @@ bool load_config(const String& json){
         else if(doc["sensors"][keyValue.key().c_str()]["type"] == "raw_analog")
             sensor_handler::getInstance()->add_sensor(sen_name, new raw_analog_sensor(sen_pin, sen_name));
 
-//        Serial.print(sen_name + "\n");
-//        Serial.print(sen_type + "\n");
-//        Serial.print(String(sen_pin) + "\n");
-//        delay(50);
+    }
+
+    JsonObject servos_root = doc["servo"].as<JsonObject>();
+    for(JsonPair keyValue : servos_root) {
+        const String ser_name = keyValue.key().c_str();
+        const int ser_pin = doc["servo"][keyValue.key().c_str()]["pin"];
+        servo_handler::getInstance()->add_servo(ser_name, new my_servo(ser_pin));
     }
 
     JsonObject shift_in_root = doc["shift_register_in"].as<JsonObject>();

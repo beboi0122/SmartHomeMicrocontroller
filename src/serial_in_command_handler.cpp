@@ -7,6 +7,7 @@
 #include "serial_in_command_handler.h"
 #include "../lib/ArduinoJson.h"
 #include "shift_register_out_handler.h"
+#include "servo_handler.h"
 
 serial_in_command_handler* serial_in_command_handler::instance = nullptr;
 
@@ -28,6 +29,11 @@ void serial_in_command_handler::read_from_serial() {
                     unsigned int pin = doc[msg]["pin"];
                     unsigned int val = doc[msg]["val"];
                     shift_register_out_handler::getInstance()->setPin(pin, val);
+                }
+                else if(msg == "SET_SERVO"){
+                    String name = doc[msg]["name"];
+                    int pos = doc[msg]["pos"];
+                    servo_handler::getInstance()->set(name, pos);
                 }
             }
         }

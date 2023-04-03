@@ -35,7 +35,7 @@ void sensor_handler::read_sensors() {
         for(const String& name : sensor_names){
             sensors[name]->read_sensor();
         }
-        delay(500);
+        delay(1000);
     }
 }
 
