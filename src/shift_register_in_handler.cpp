@@ -43,7 +43,7 @@ void shift_register_in_handler::run() {
         }
         for (int i = 0; i < shift_register_number; ++i) {
             if (dat_before[i] != dat[i]){
-                String out = R"({"shift_register_in": {"values": [)" ;
+                String out = R"({ "INERRUPT_FROM_ESP32": {"shift_register_in": {"values": [)" ;
                 for (int j = 0; j < shift_register_number; j++){
                     if(j < shift_register_number-1)
                         out +=  " " + String(dat[j]) + ",";
@@ -51,7 +51,7 @@ void shift_register_in_handler::run() {
                         out += " " + String(dat[j]) + " ";
                     dat_before[j] = dat[j];
                 }
-                out += "] }}\n";
+                out += "] }}} \n";
                 serial_communication_handler::getInstance()->send_interrupt(out);
                 break;
             }

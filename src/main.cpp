@@ -21,7 +21,10 @@ void setup() {
     bool config_successful = false;
     String json;
     while (!config_successful) {
-        while (Serial.available() == 0);     //wait for data available
+        while (Serial.available() == 0){
+            Serial.print("{\"CONFIG_FILE_NEEDED\": 9999}\n");
+            delay(100);
+        }     //wait for data available
         json = Serial.readStringUntil('\n');
         json.trim();
         config_successful = load_config(json);

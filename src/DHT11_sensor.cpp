@@ -15,7 +15,7 @@ DHT11_sensor::DHT11_sensor(uint8_t sensor_pin, String sensor_name): sensor(senso
 void DHT11_sensor::read_sensor() {
     float temp =  this->dht->readTemperature();
     float hum = this->dht->readHumidity();
-    String out = "{ \"" + this->sensor_name + R"(": {"Temperature": )" + temp + R"(, "Humidityz": )" + hum + " }}\n";
+    String out = R"({ "SENSOR_DATA_FROM_ESP32": { ")" + this->sensor_name + R"(": {"temperature": )" + temp + R"(, "humidity": )" + hum + " }}}\n";
 
 
     serial_communication_handler::getInstance()->send_sensor_data(this->sensor_name, out);

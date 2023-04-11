@@ -42,19 +42,20 @@ void serial_communication_handler::print_to_serial() {
         if(!interrupt_data_row->empty()){
             this->interrupt_data_lock.lock();
             for(const auto & i : *interrupt_data_row){
-                Serial.print("INERRUPT_FROM_ESP32\n");
-                Serial.print(String(i.length()) + "\n");
-                Serial.println(i + "\n");
+//                Serial.print("INERRUPT_FROM_ESP32\n");
+//                Serial.print(String(i.length()) + "\n");
+                Serial.print(i);
             }
             interrupt_data_row->clear();
             this->interrupt_data_lock.unlock();
         }
         this->sensor_data_lock.lock();
         for(const auto & i : *sensor_data_row){
-            Serial.print("SENSOR_DATA_FROM_ESP32\n");
-            //Serial.println(i[0]);
-            Serial.print(String(i[1].length()) + "\n");
-            Serial.print(i[1] + "\n");
+//            Serial.print("SENSOR_DATA_FROM_ESP32\n");
+//            //Serial.println(i[0]);
+//            Serial.print(String(i[1].length()) + "\n");
+//            Serial.print(i[1] + "\n");
+            Serial.print(i[1]);
         }
         sensor_data_row->clear();
         this->sensor_data_lock.unlock();
