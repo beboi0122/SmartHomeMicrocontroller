@@ -43,7 +43,7 @@ void loop() {
 }
 
 bool load_config(const String& json){
-    DynamicJsonDocument doc(1024);
+    DynamicJsonDocument doc(4096);
     DeserializationError root = deserializeJson(doc, json.c_str());
     Serial.println(root.c_str());
 
@@ -52,6 +52,8 @@ bool load_config(const String& json){
     for(JsonPair keyValue : sensors_root){
         const String sen_name = keyValue.key().c_str();
         const String sen_type = doc["sensors"][keyValue.key().c_str()]["type"];
+        if(sen_type == "digital")
+            continue;
         const int sen_pin = doc["sensors"][keyValue.key().c_str()]["pin"];
         if(sen_type == "dht11")
             sensor_handler::getInstance()->add_sensor(sen_name, new DHT11_sensor(sen_pin, sen_name));
