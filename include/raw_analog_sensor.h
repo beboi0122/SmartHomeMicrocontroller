@@ -11,7 +11,7 @@
 class raw_analog_sensor: public sensor {
 public:
     raw_analog_sensor(uint8_t sensor_pin, String sensor_name);
-
+    float last_sent = -1000;
     void read_sensor() override;
 
 };

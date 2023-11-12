@@ -15,7 +15,11 @@ raw_analog_sensor::raw_analog_sensor(uint8_t sensor_pin, String sensor_name): se
 
 void raw_analog_sensor::read_sensor() {
     float reading = analogRead(sensor_pin);
-    String out = R"({ "SENSOR_DATA_FROM_ESP32": { ")" + this->sensor_name + R"(": {"raw_reading": )" + reading + " }}}\n";
-    serial_communication_handler::getInstance()->send_sensor_data(this->sensor_name, out);
+    if(abs(reading-this->last_sent)>200) {
+        this->last_sent = reading;
+        String out = R"({ "SENSOR_DATA_FROM_ESP32": { ")" + this->sensor_name + R"(": {"raw_reading": )" + reading +
+                     " }}}\n";
+        serial_communication_handler::getInstance()->send_sensor_data(this->sensor_name, out);
+    }
 
 }
