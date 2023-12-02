@@ -5,7 +5,7 @@
 #ifndef SMARTHOMEARDUINO_MY_SERVO_H
 #define SMARTHOMEARDUINO_MY_SERVO_H
 
-#include "Servo.h"
+#include "../lib/Servo/Servo.h"
 
 class my_servo {
     const int pin;
