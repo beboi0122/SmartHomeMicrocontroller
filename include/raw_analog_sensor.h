@@ -6,8 +6,6 @@
 #define SMARTHOME_RAW_ANALOG_SENSOR_H
 
 
-
-
 class raw_analog_sensor: public sensor {
 public:
     raw_analog_sensor(uint8_t sensor_pin, String sensor_name);

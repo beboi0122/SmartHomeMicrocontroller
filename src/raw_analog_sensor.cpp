@@ -21,5 +21,4 @@ void raw_analog_sensor::read_sensor() {
                      " }}}\n";
         serial_communication_handler::getInstance()->send_sensor_data(this->sensor_name, out);
     }
-
 }

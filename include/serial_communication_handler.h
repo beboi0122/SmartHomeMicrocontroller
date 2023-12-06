@@ -23,10 +23,8 @@ private:
 
     static serial_communication_handler* instance;
     serial_communication_handler();
-
     void print_to_serial();
 public:
-
     serial_communication_handler(const serial_communication_handler& obj) = delete;
     static serial_communication_handler* getInstance();
     void send_sensor_data(const String& sensor_name, const String& json);

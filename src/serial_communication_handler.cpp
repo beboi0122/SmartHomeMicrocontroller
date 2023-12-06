@@ -13,7 +13,6 @@ serial_communication_handler* serial_communication_handler::instance = nullptr;
 serial_communication_handler::serial_communication_handler() {
     sensor_data_row = new std::vector<const String*>();
     interrupt_data_row = new std::vector<String>();
-//    Serial.begin(9600);
     serial_print_thread = std::thread(&serial_communication_handler::print_to_serial, this);
     serial_print_thread.detach();
 }
@@ -55,6 +54,5 @@ void serial_communication_handler::print_to_serial() {
         this->sensor_data_lock.unlock();
         delay(100);
     }
-
 }
 

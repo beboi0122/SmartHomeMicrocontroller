@@ -14,7 +14,6 @@ class my_servo {
 public:
     my_servo(int pin);
     void set(int pos);
-
 };
 
 

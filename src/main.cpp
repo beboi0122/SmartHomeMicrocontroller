@@ -34,10 +34,6 @@ void setup() {
     sensor_handler::getInstance()->run();
     serial_in_command_handler::getInstance()->run();
 
-
-    uint8_t a[]{0, 0};
-    shift_register_out_handler::getInstance()->setDat(a);
-
 }
 void loop() {
 }
